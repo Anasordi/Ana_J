@@ -1,145 +1,116 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <title>Cadastro - Endereço</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f9;
-      margin: 0;
-      padding: 0;
-    }
+  <html lang="PT-BR">
+      <head>
+          <style>
+            .legenda{
+              color: rgb(12, 80, 80);
+            }
+            .texto{
+              color: rgb(0, 0, 0);
+            }
+            .campo{
+              border:1px solid rgb(192, 253, 255);
+            }
+            fieldset{
+              border:1px solid rgb(130, 218, 245);
+              background: #3df5dc;
+              background: radial-gradient(circle, rgb(74, 214, 232) 0%, rgb(255, 255, 255) 100%);
+              width: 200px;
+              margin-left: 750px;
+              margin-top: 50px;
+            }
+            .botao{
+              background-color: blue;
+              color: white;
+            }
+            body{
+              background-image: url("https://wallpapers.com/images/hd/best-computer-background-i1mwyueswsfwtmrx.jpg");
+              background-repeat:no-repeat;
+              background-size:cover ;
+            }
 
-    .container {
-      width: 800px;
-      margin: 40px auto;
-      background: #fff;
-      border-radius: 6px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      padding: 20px;
-    }
+            
+          </style>
 
-    .tabs {
-      display: flex;
-      border-bottom: 2px solid #ccc;
-      margin-bottom: 20px;
-    }
+         <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import {
+      getFirestore,
+      collection,
+      addDoc
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-    .tab {
-      padding: 10px 20px;
-      cursor: pointer;
-      border: 1px solid #ccc;
-      border-bottom: none;
-      background: #eee;
-      margin-right: 5px;
-      border-radius: 6px 6px 0 0;
-    }
+    const firebaseConfig = {
+         apiKey: "AIzaSyADRk3wwcd9gwywr8yugZ5TOpMHtVy4Fpk",
+  authDomain: "anasordi-6840d.firebaseapp.com",
+  projectId: "anasordi-6840d",
+  storageBucket: "anasordi-6840d.firebasestorage.app",
+  messagingSenderId: "437485171021",
+  appId: "1:437485171021:web:77cb98efb879dfb4b90704"
+    };
 
-    .tab.active {
-      background: #fff;
-      font-weight: bold;
-    }
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
 
-    form label {
-      display: block;
-      margin-top: 10px;
-      font-weight: bold;
-    }
+    const form = document.getElementById("formulario");
+    const mensagem = document.getElementById("mensagem");
 
-    form input {
-      width: 100%;
-      padding: 8px;
-      margin-top: 4px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
 
-    .inline-group {
-      display: flex;
-      gap: 10px;
-    }
+      const nome = document.getElementById("nome").value;
+      const cep = document.getElementById("cep").value;
+      const cpf = document.getElementById("cpf").value;
+      const data_nascimento = document.getElementById("data_nascimento").value;
+      const email = document.getElementById("email").value;
+      const foto = document.getElementById("foto").value;
+      const idade = document.getElementById("idade").value;
+      const rg = document.getElementById("rg").value;
+      const senha = document.getElementById("senha").value;
+      const telefone = document.getElementById("telefone").value;
 
-    .inline-group input {
-      flex: 1;
-    }
+      try {
+        await addDoc(collection(db, "usuarios"), {
+        nome,
+        cep,
+        cpf,
+        data_nascimento,
+        email,
+        foto,
+        idade,
+        rg,
+        senha,
+        telefone
+        
+        });
 
-    .submit-btn {
-      margin-top: 20px;
-      padding: 10px 20px;
-      background: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    .submit-btn:hover {
-      background: #45a049;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <div class="tabs">
-      <div class="tab active">Endereço</div>
-      <div class="tab">Salário</div>
-      <div class="tab">Documentos</div>
-      <div class="tab">Departamentos</div>
-      <div class="tab">Pessoal</div>
-      <div class="tab">CNH e MOPP</div>
-      <div class="tab">Outros</div>
-      <div class="tab">Serviços</div>
-      <div class="tab">Despesas</div>
-      <div class="tab">Jornada</div>
-      <div class="tab">Eventos</div>
-    </div>
-
-    <form>
-      <label for="cep">CEP:</label>
-      <input type="text" id="cep" name="cep">
-
-      <label for="endereco">Endereço:</label>
-      <input type="text" id="endereco" name="endereco">
-
-      <label for="complemento">Complemento:</label>
-      <input type="text" id="complemento" name="complemento">
-
-      <label for="bairro">Bairro:</label>
-      <input type="text" id="bairro" name="bairro">
-
-      <label for="cidade">Cidade:</label>
-      <input type="text" id="cidade" name="cidade">
-
-      <label for="uf">UF:</label>
-      <input type="text" id="uf" name="uf" value="SP">
-
-      <label>Telefone 1:</label>
-      <div class="inline-group">
-        <input type="text" placeholder="( ) ___-____">
-        <input type="text" placeholder="Complemento">
-      </div>
-
-      <label>Telefone 2:</label>
-      <div class="inline-group">
-        <input type="text" placeholder="( ) ___-____">
-        <input type="text" placeholder="Complemento">
-      </div>
-
-      <label>Celular:</label>
-      <div class="inline-group">
-        <input type="text" placeholder="( ) ___-____">
-        <input type="text" placeholder="Complemento">
-      </div>
-
-      <label>Fax:</label>
-      <div class="inline-group">
-        <input type="text" placeholder="( ) __________">
-        <input type="text" placeholder="Complemento">
-      </div>
-
-      <button type="submit" class="submit-btn">Inserir Registro</button>
-    </form>
-  </div>
-</body>
-</html>
+        mensagem.textContent = "Usuário salvo com sucesso.";
+        mensagem.style.color = "green";
+        form.reset();
+      } catch (error) {
+        mensagem.textContent = "Erro ao salvar: " + error.message;
+        mensagem.style.color = "red";
+      }
+    });
+  </script>
+        
+      </head>
+      <body>
+          <form id="formulario">
+                <fieldset>
+                    <legend> <p class="legenda">CADASTRO DE USUARIOS </p> </legend>
+                    <p class="texto">NOME COMPLETO:</p> <input type="text"  id="nome" class="campo" placeholder="Nome de usuario" minlength="1" maxlength="20" id="nome" class="nome" name="nome" required><br>
+                    <p class="texto">CEP:</p> <input type="text"  id="cep" class="campo" placeholder="Nome de usuario" minlength="1" maxlength="20" id="nome" class="nome" name="nome" required><br>
+                    <p class="texto">CPF:</p> <input type="text"  id="cpf" class="campo" placeholder="Nome de usuario" minlength="1" maxlength="20" id="nome" class="nome" name="nome" required><br>
+                    <p class="texto">DATA DE NASCIMENTO:</p> <input type="text" id="data_nascimento" class="campo" placeholder="Nome de usuario" minlength="1" maxlength="20" id="nome" class="nome" name="nome" required><br>
+                    <p class="texto">EMAIL:</p> <input type="text" id="email" class="campo" placeholder="Nome de usuario" minlength="1" maxlength="20" id="nome" class="nome" name="nome" required><br>
+                    <p class="texto">FOTO:</p> <input type="text" id="foto" class="campo" placeholder="Nome de usuario" minlength="1" maxlength="20" id="nome" class="nome" name="nome" required><br>
+                    <p class="texto">IDADE:</p> <input type="text" id="idade" class="campo" placeholder="Nome de usuario" minlength="1" maxlength="20" id="nome" class="nome" name="nome" required><br>
+                    <p class="texto">RG:</p> <input type="text" id="rg" class="campo" placeholder="Nome de usuario" minlength="1" maxlength="20" id="nome" class="nome" name="nome" required><br>
+                    <p class="texto">SENHA:</p> <input type="text" id="senha" class="campo" placeholder="Nome de usuario" minlength="1" maxlength="20" id="nome" class="nome" name="nome" required><br>
+                    <p class="texto">TELEFONE:</p> <input type="text" id="telefone" class="campo" placeholder="Nome de usuario" minlength="1" maxlength="20" id="nome" class="nome" name="nome" required><br>
+                    <input type="submit" value="Cadastrar">
+                </fieldset>
+          </form>
+      </body>
+  </html>
