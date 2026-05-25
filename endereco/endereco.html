@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Cadastro - Endereço</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      width: 800px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 6px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      padding: 20px;
+    }
+
+    .tabs {
+      display: flex;
+      border-bottom: 2px solid #ccc;
+      margin-bottom: 20px;
+    }
+
+    .tab {
+      padding: 10px 20px;
+      cursor: pointer;
+      border: 1px solid #ccc;
+      border-bottom: none;
+      background: #eee;
+      margin-right: 5px;
+      border-radius: 6px 6px 0 0;
+    }
+
+    .tab.active {
+      background: #fff;
+      font-weight: bold;
+    }
+
+    form label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    form input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 4px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .inline-group {
+      display: flex;
+      gap: 10px;
+    }
+
+    .inline-group input {
+      flex: 1;
+    }
+
+    .submit-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .submit-btn:hover {
+      background: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="tabs">
+      <div class="tab active">Endereço</div>
+      <div class="tab">Salário</div>
+      <div class="tab">Documentos</div>
+      <div class="tab">Departamentos</div>
+      <div class="tab">Pessoal</div>
+      <div class="tab">CNH e MOPP</div>
+      <div class="tab">Outros</div>
+      <div class="tab">Serviços</div>
+      <div class="tab">Despesas</div>
+      <div class="tab">Jornada</div>
+      <div class="tab">Eventos</div>
+    </div>
+
+    <form>
+      <label for="cep">CEP:</label>
+      <input type="text" id="cep" name="cep">
+
+      <label for="endereco">Endereço:</label>
+      <input type="text" id="endereco" name="endereco">
+
+      <label for="complemento">Complemento:</label>
+      <input type="text" id="complemento" name="complemento">
+
+      <label for="bairro">Bairro:</label>
+      <input type="text" id="bairro" name="bairro">
+
+      <label for="cidade">Cidade:</label>
+      <input type="text" id="cidade" name="cidade">
+
+      <label for="uf">UF:</label>
+      <input type="text" id="uf" name="uf" value="SP">
+
+      <label>Telefone 1:</label>
+      <div class="inline-group">
+        <input type="text" placeholder="( ) ___-____">
+        <input type="text" placeholder="Complemento">
+      </div>
+
+      <label>Telefone 2:</label>
+      <div class="inline-group">
+        <input type="text" placeholder="( ) ___-____">
+        <input type="text" placeholder="Complemento">
+      </div>
+
+      <label>Celular:</label>
+      <div class="inline-group">
+        <input type="text" placeholder="( ) ___-____">
+        <input type="text" placeholder="Complemento">
+      </div>
+
+      <label>Fax:</label>
+      <div class="inline-group">
+        <input type="text" placeholder="( ) __________">
+        <input type="text" placeholder="Complemento">
+      </div>
+
+      <button type="submit" class="submit-btn">Inserir Registro</button>
+    </form>
+  </div>
+</body>
+</html>
